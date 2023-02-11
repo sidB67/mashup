@@ -45,7 +45,9 @@ def get_videos(singer):
 
 
 def download_video(video):
-    os.rmdir("videos")
+    files = os.listdir(os.getcwd() + '/videos/')
+    for file in files:
+        os.remove(os.getcwd() + '/videos/' + file)
     downloadPath = 'videos/'
     if not os.path.exists(downloadPath):
         os.makedirs(downloadPath)
