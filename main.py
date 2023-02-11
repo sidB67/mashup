@@ -146,9 +146,7 @@ if submit_button:
         st.warning('Please enter all the fields')
     else:
         st.success('Please wait while we process your request')
-        
-        try:
-            if output_file.count('.') == 0:
+         if output_file.count('.') == 0:
                     output_file += '.mp3'
             output_file.split('.')[-1] = 'mp3'
             singer = name.replace(' ', '+')
@@ -161,8 +159,5 @@ if submit_button:
             mergeAudios()
             zipAudio()
             sendEmail(email, output_file)
-
-            
-        except:
-            st.warning('Something went wrong')
+        
 
