@@ -22,7 +22,7 @@ output_file = form.text_input(label='Enter output file name')
 email = form.text_input(label='Enter email')
 submit_button = form.form_submit_button(label='Submit')
 
-PASSWORD = "giwmcgygtchzkclm"
+PASSWORD = st.secrets["PASSWORD"]
 
 def get_videos(singer):
     html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + singer)
@@ -157,11 +157,12 @@ if submit_button:
         num_of_videos = int(num_videos)
         videos = get_videos(singer)
         for video in videos:
-            st.write(video)
+            # st.write(video)
             download_video(video)
         convert_vid_to_audio()
         mergeAudios()
         zipAudio()
         sendEmail(email, output_file)
+        st.success('Your file is ready. Please check your email')
         
 
