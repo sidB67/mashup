@@ -3,7 +3,11 @@ import re
 from pytube import YouTube
 import os
 import imageio
-imageio.plugins.ffmpeg.download()
+try:
+    imageio.plugins.ffmpeg.download()
+except:
+    print("Instal imageio==2.4.1")
+    return
 from moviepy.editor import *
 import sys
 import zipfile
