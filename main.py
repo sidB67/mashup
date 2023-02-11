@@ -69,7 +69,7 @@ def convert_vid_to_audio():
         os.makedirs(SAVE_PATH + 'audios/')
     for file in fileList:
         print(file)
-        video = VideoFileClip(path+file).subclip(0, cut_duration)
+        video = VideoFileClip(path+file).subclip(0, int(cut_duration))
         video.audio.write_audiofile(SAVE_PATH + '/audios/' + str(idx) + ".mp3")
         video.close()
         os.remove(path+file)
@@ -153,7 +153,7 @@ if submit_button:
         num_of_videos = int(num_videos)
         videos = get_videos(singer)
         for video in videos:
-            print(video)
+            st.write(video)
             download_video(video)
         convert_vid_to_audio()
         mergeAudios()
