@@ -47,6 +47,8 @@ def get_videos(singer):
 
 def download_video(video):
     downloadPath = 'videos/'
+    if not os.path.exists(downloadPath):
+        os.makedirs(downloadPath)
     yt = YouTube(video)
     try :
         yt.streams.first().download(downloadPath)
@@ -58,26 +60,46 @@ def convert_vid_to_audio():
     #get paths of videos stored in videos folder using os module
     path = os.getcwd()+'/videos/'
     print(path)
-
+    ds_store = path + ".DS_Store"
+    if os.path.exists(ds_store):
+        os.remove(ds_store)
     fileList = os.listdir(path)
     print(fileList)
     idx = 1
+    if not os.path.exists(SAVE_PATH + 'audios/'):
+        os.makedirs(SAVE_PATH + 'audios/')
     for file in fileList:
         print(file)
         video = VideoFileClip(path+file).subclip(0, cut_duration)
-        video.audio.write_audiofile(SAVE_PATH + '/audios/' + str(idx) + ".wav")
+        video.audio.write_audiofile(SAVE_PATH + '/audios/' + str(idx) + ".mp3")
         video.close()
         os.remove(path+file)
         idx += 1
 
 def mergeAudios():
     SAVE_PATH = os.getcwd() + '/'
-    final_wav_path = SAVE_PATH + "/audios/" + output_file
+    final_wav_path = SAVE_PATH + "audios/" + output_file
+    ds_store = SAVE_PATH + "/audios/.DS_Store"
+    if os.path.exists(ds_store):
+        os.remove(ds_store)
+    if os.path.exists(final_wav_path):
+        os.remove(final_wav_path)
+    for file in os.listdir(SAVE_PATH + "/audios/"):
+        if file.endswith(".zip"):
+            os.remove(SAVE_PATH + "/audios/" + file)
     wavs = os.listdir(SAVE_PATH + "/audios/")
+    
     final_clip = concatenate_audioclips([AudioFileClip(SAVE_PATH + "/audios/"+wav) for wav in wavs])
     final_clip.write_audiofile(final_wav_path)
     final_clip.close()
     print("Done merging wavs to " + final_wav_path)
+
+def zipAudio():
+    SAVE_PATH = os.getcwd() + '/'
+    final_wav_path = "audios/" + output_file
+    zip_file = final_wav_path + ".zip"
+    with zipfile.ZipFile(zip_file, 'w') as myzip:
+        myzip.write(final_wav_path)
     
     
 
