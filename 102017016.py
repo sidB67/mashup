@@ -6,7 +6,7 @@ import imageio
 imageio.plugins.ffmpeg.download()
 from moviepy.editor import *
 import sys
-
+import zipfile
 input_args = sys.argv
 if len(input_args) != 5:
     print("Invalid number of arguments")
@@ -110,9 +110,7 @@ print('Get video links done \n')
 for video in videos:
     print(video)
     download_video(video)
-
 print("videos downloaded \n")
-
 convert_vid_to_audio()
-
 mergeAudios()
+zipAudio()
