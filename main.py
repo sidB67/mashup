@@ -22,7 +22,7 @@ output_file = form.text_input(label='Enter output file name')
 email = form.text_input(label='Enter email')
 submit_button = form.form_submit_button(label='Submit')
 
-PASSWORD = st.secrets["PASSWORD"]
+PASSWORD = "giwmcgygtchzkclm"
 
 def get_videos(singer):
     html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + singer)
