@@ -146,18 +146,18 @@ if submit_button:
         st.warning('Please enter all the fields')
     else:
         st.success('Please wait while we process your request')
-         if output_file.count('.') == 0:
-                    output_file += '.mp3'
-            output_file.split('.')[-1] = 'mp3'
-            singer = name.replace(' ', '+')
-            num_of_videos = int(num_videos)
-            videos = get_videos(singer)
-            for video in videos:
-                print(video)
-                download_video(video)
-            convert_vid_to_audio()
-            mergeAudios()
-            zipAudio()
-            sendEmail(email, output_file)
+        if output_file.count('.') == 0:
+            output_file += '.mp3'
+        output_file.split('.')[-1] = 'mp3'
+        singer = name.replace(' ', '+')
+        num_of_videos = int(num_videos)
+        videos = get_videos(singer)
+        for video in videos:
+            print(video)
+            download_video(video)
+        convert_vid_to_audio()
+        mergeAudios()
+        zipAudio()
+        sendEmail(email, output_file)
         
 
