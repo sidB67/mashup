@@ -7,7 +7,7 @@ try:
     imageio.plugins.ffmpeg.download()
 except:
     print("Instal imageio==2.4.1")
-    return
+    exit(1)
 from moviepy.editor import *
 import sys
 import zipfile
@@ -104,10 +104,16 @@ def zipAudio():
     zip_file = final_wav_path + ".zip"
     with zipfile.ZipFile(zip_file, 'w') as myzip:
         myzip.write(final_wav_path)
+
+def clearAudios():
+    path = os.getcwd()+'/audios/'
+    fileList = os.listdir(path)
+    for file in fileList:
+        os.remove(path+file)
     
     
 
-
+clearAudios()
 videos = get_videos(singer)
 print(len(videos))
 print('Get video links done \n')

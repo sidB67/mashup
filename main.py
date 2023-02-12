@@ -144,7 +144,11 @@ def sendEmail(email, result_file) :
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(sender_email, PASSWORD)
         server.sendmail(sender_email, receiver_email, text)
-    
+def clearAudios():
+    path = os.getcwd()+'/audios/'
+    fileList = os.listdir(path)
+    for file in fileList:
+        os.remove(path+file)
 if submit_button:
     if name == '' or num_videos == '' or cut_duration == '' or output_file == '' or email == '':
         st.warning('Please enter all the fields')
@@ -155,6 +159,7 @@ if submit_button:
         output_file.split('.')[-1] = 'mp3'
         singer = name.replace(' ', '+')
         num_of_videos = int(num_videos)
+        clearAudios()
         videos = get_videos(singer)
         for video in videos:
             # st.write(video)
