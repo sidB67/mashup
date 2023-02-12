@@ -114,10 +114,10 @@ def sendEmail(email, result_file) :
     message = MIMEMultipart()
     message["From"] = sender_email
     message["To"] = receiver_email
-    message["Subject"] = "Topsis Final CSV Attachment"
+    message["Subject"] = "Mashup Audio File"
 
         # Add body to email
-    message.attach(MIMEText("Please find the attached CSV file.", "plain"))
+    message.attach(MIMEText("Please find the attached zip file.", "plain"))
 
         # Open PDF file in bynary
     zip_file = "audios/" + output_file + ".zip"
