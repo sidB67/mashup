@@ -24,6 +24,7 @@ submit_button = form.form_submit_button(label='Submit')
 
 PASSWORD = st.secrets["PASSWORD"]
 
+
 def get_videos(singer):
     html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + singer)
     video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
@@ -45,9 +46,7 @@ def get_videos(singer):
 
 
 def download_video(video):
-    files = os.listdir(os.getcwd() + '/videos/')
-    for file in files:
-        os.remove(os.getcwd() + '/videos/' + file)
+   
     downloadPath = 'videos/'
     if not os.path.exists(downloadPath):
         os.makedirs(downloadPath)
@@ -72,12 +71,15 @@ def convert_vid_to_audio():
     if not os.path.exists(SAVE_PATH + 'audios/'):
         os.makedirs(SAVE_PATH + 'audios/')
     for file in fileList:
-        print(file)
-        video = VideoFileClip(path+file).subclip(0, int(cut_duration))
-        video.audio.write_audiofile(SAVE_PATH + '/audios/' + str(idx) + ".mp3")
-        video.close()
-        os.remove(path+file)
-        idx += 1
+        try:
+            print(file)
+            video = VideoFileClip(path+file).subclip(0, int(cut_duration))
+            video.audio.write_audiofile(SAVE_PATH + '/audios/' + str(idx) + ".mp3")
+            video.close()
+            os.remove(path+file)
+            idx += 1
+        except:
+            continue
 
 def mergeAudios():
     SAVE_PATH = os.getcwd() + '/'
