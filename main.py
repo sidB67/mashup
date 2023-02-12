@@ -146,14 +146,14 @@ def sendEmail(email, result_file) :
         server.sendmail(sender_email, receiver_email, text)
 def clearFiles():
     path = os.getcwd()+'/audios/'
-    path2 = os.getcwd()+'/videos/'
-    if os.path.exists(path) and os.path.exists(path2):
+    # path2 = os.getcwd()+'/videos/'
+    if os.path.exists(path):
         fileList = os.listdir(path)
         for file in fileList:
             os.remove(path+file)
-        fileList = os.listdir(path2)
-        for file in fileList:
-            os.remove(path2+file)
+        # fileList = os.listdir(path2)
+        # for file in fileList:
+        #     os.remove(path2+file)
 if submit_button:
     if name == '' or num_videos == '' or cut_duration == '' or output_file == '' or email == '':
         st.warning('Please enter all the fields')
