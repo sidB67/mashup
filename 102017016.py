@@ -105,15 +105,23 @@ def zipAudio():
     with zipfile.ZipFile(zip_file, 'w') as myzip:
         myzip.write(final_wav_path)
 
-def clearAudios():
+def clearFiles():
     path = os.getcwd()+'/audios/'
-    fileList = os.listdir(path)
-    for file in fileList:
-        os.remove(path+file)
+    path2 = os.getcwd()+'/videos/'
+    if os.path.exists(path) and os.path.exists(path2):
+        fileList = os.listdir(path)
+        for file in fileList:
+            os.remove(path+file)
+        fileList = os.listdir(path2)
+        for file in fileList:
+            os.remove(path2+file)
+
+  
+        
     
     
 
-clearAudios()
+clearFiles()
 videos = get_videos(singer)
 print(len(videos))
 print('Get video links done \n')
